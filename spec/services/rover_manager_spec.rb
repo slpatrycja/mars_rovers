@@ -8,7 +8,7 @@ require_relative '../../lib/services/rover_manager.rb'
 
 RSpec.describe RoverManager do
   let(:coordinates_string) { '1 2 N' }
-  let(:commands_string) { 'LMLMLMLMM' }
+  let(:commands_string) { 'L M L M L M L M M' }
   let(:plateu) { Plateu.new(x: 5, y: 5) }
 
   let(:service) { described_class.new(coordinates_string: coordinates_string, commands_string: commands_string, plateu: plateu) }
@@ -42,7 +42,7 @@ RSpec.describe RoverManager do
       end
 
       it 'passes each do the commands to rover' do
-        commands_string.split('').each do |command|
+        commands_string.delete(' ').split('').each do |command|
           expect(rover).to receive(:process).with(command)
         end
 

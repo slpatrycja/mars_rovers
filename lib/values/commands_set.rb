@@ -3,9 +3,9 @@
 require_relative '../types'
 
 class CommandsSet < Dry::Struct
-  attribute :value, Types::String.constrained(format: /\A[LRM]+\z/i)
+  attribute :value, Types::String.constrained(format: /\A[LRM\s]+\z/i)
 
   def in_array
-    value.split('')
+    value.delete(' ').split('')
   end
 end
